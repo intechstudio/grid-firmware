@@ -1,4 +1,4 @@
-name: Build and push docker image
+name: Build and push Docker image
 
 on:
   push:
@@ -15,9 +15,6 @@ jobs:
 
       - name: Set environment variables
         run: echo "IMAGE_TAG=$(basename ${{ github.ref }})" >> $GITHUB_ENV
-
-      - name: Use environment variables
-        run: echo "$IMAGE_TAG"
 
       - name: Checkout code
         uses: actions/checkout@v6
