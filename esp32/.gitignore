@@ -1,5 +1,5 @@
-CMakeLists.txt
-sdkconfig
+!CMakeLists.txt
+!sdkconfig
 
 !bootloader
 !bootloader/partitions-8MB.csv
