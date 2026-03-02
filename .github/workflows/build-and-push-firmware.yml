@@ -1,5 +1,11 @@
 name: Build and push firmware
 
+on:
+  workflow-call:
+    outputs:
+      artifact_name:
+        value: "grid_esp32_fw.uf2"
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
