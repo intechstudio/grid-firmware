@@ -1,7 +1,7 @@
 name: Build and push firmware
 
 on:
-  workflow-call:
+  workflow_call:
     outputs:
       artifact_name:
         value: "grid_esp32_fw.uf2"
