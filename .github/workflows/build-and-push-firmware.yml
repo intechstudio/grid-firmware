@@ -13,15 +13,23 @@ jobs:
     permissions:
       contents: read
       packages: read
-    container:
-      image: ghcr.io/${{ github.repository }}:${{ github.ref_name }}
-      credentials:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
           ref: ${{ github.ref }}
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull image
+        run: docker pull ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+
       - name: Build ESP32 firmware
-        run: sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
+        run: docker run -v $PWD:/project -w /project/ \
+          ghcr.io/${{ github.repository }}:${{ github.ref_name }} \
+          sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
