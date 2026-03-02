@@ -1,0 +1,9 @@
+idf_component_register(
+    SRCS
+        "vmp/vmp_def.c"
+        "vmp/vmp_tag.c"
+        "../../../tools/vmp/vmp.c"
+    INCLUDE_DIRS
+        "vmp"
+        "../../../tools/vmp"
+)
