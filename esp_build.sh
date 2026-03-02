@@ -1,5 +1,8 @@
 #!/bin/sh
 
+echo $PWD
+which idf.py
+
 idf.py -C esp32 build
 
 if [ $? -ne 0 ] ; then
