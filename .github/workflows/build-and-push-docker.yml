@@ -1,0 +1,16 @@
+name: Build and push docker image
+
+on:
+  push:
+    paths:
+      - 'Dockerfile'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-slim
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Greeting
+        run: echo "hello there"

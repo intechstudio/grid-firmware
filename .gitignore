@@ -8,6 +8,10 @@
 
 !.gitignore
 
+!.github
+!.github/workflows
+!.github/workflows/*.yml
+
 !common
 !esp32
 !rp2040
