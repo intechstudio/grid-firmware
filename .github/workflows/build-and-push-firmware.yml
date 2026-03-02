@@ -24,7 +24,4 @@ jobs:
         with:
           ref: ${{ github.ref }}
       - name: Build ESP32 firmware
-        run: |
-          ./lua_build.sh
-          ./pico_build.sh
-          ./esp_build.sh
+        run: sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
