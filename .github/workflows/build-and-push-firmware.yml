@@ -41,7 +41,9 @@ jobs:
 
       - name: Copy and rename artifacts
         run: |
+          cp esp32/build/grid_fw.uf2 grid_esp32_release_${{ env.ACTION_DATE }}.uf2
           cp esp32/build/grid_fw.uf2 grid_esp32_nightly_${{ env.ACTION_DATE }}.uf2
+          cp esp32/build/grid_fw.uf2 grid_esp32_nightly.uf2
 
       - name: Upload nightly artifacts
         uses: actions/upload-artifact@v6
@@ -49,3 +51,11 @@ jobs:
           name: nightly_firmware
           path: |
             grid_esp32_nightly_${{ env.ACTION_DATE }}.uf2
+            grid_esp32_nightly.uf2
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: release_firmware
+          path: |
+            grid_esp32_release_${{ env.ACTION_DATE }}.uf2
