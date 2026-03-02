@@ -5,6 +5,7 @@ on:
     outputs:
       artifact_name:
         value: "grid_esp32_fw.uf2"
+  workflow_dispatch:
 
 jobs:
   build-and-push:
