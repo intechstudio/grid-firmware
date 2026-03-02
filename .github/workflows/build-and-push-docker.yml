@@ -15,7 +15,6 @@ jobs:
 
       - name: Set environment variables
         run: echo "IMAGE_TAG=$(basename ${{ github.ref }})" >> $GITHUB_ENV
-        TAG: ${{ github.ref }}
 
       - name: Use environment variables
         run: echo "$IMAGE_TAG"
