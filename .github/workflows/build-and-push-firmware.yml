@@ -8,19 +8,23 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: read
+  set-env:
     steps:
-
       - name: Set image tag environment variable
         run: echo "IMAGE_TAG=$(basename ${{ github.ref }})" >> $GITHUB_ENV
 
       - name: Set image environment variable
         run: echo "IMAGE_PATH=ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ env.IMAGE_TAG }}" >> $GITHUB_ENV
 
+  build-and-push:
+    needs: set-env
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    container:
+      image: ${{ env.IMAGE_PATH }}
+    steps:
       - name: Checkout code
         uses: actions/checkout@v6
         with:
