@@ -15,6 +15,8 @@ jobs:
 
       - name: Checkout code
         uses: actions/checkout@v6
+        with:
+          ref: ${{ github.ref }}
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -22,3 +24,9 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref }} .
+
+      - name: Push image
+        run: docker push ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref }}
