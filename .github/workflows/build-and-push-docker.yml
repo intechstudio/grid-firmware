@@ -13,6 +13,13 @@ jobs:
       packages: write
     steps:
 
+      - name: Set environment variables
+        run: echo "IMAGE_TAG=$(basename ${{ github.ref }})" >> $GITHUB_ENV
+        TAG: ${{ github.ref }}
+
+      - name: Use environment variables
+        run: echo "$IMAGE_TAG"
+
       - name: Checkout code
         uses: actions/checkout@v6
         with:
@@ -26,7 +33,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
-        run: docker build -t ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref }} .
+        run: docker build -t ghcr.io/${{ github.repository_owner }}/grid-firmware:$IMAGE_TAG .
 
       - name: Push image
-        run: docker push ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref }}
+        run: docker push ghcr.io/${{ github.repository_owner }}/grid-firmware:$IMAGE_TAG
