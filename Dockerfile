@@ -67,4 +67,5 @@ COPY ./patch_esp_trace_include.sh /
 RUN ./patch_esp_trace_include.sh
 
 # Define default command
+
 CMD ["bash"]
