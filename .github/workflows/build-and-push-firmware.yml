@@ -30,6 +30,4 @@ jobs:
         run: docker pull ghcr.io/${{ github.repository }}:${{ github.ref_name }}
 
       - name: Build ESP32 firmware
-        run: docker run -v $PWD:/project -w /project/ \
-          ghcr.io/${{ github.repository }}:${{ github.ref_name }} \
-          sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
+        run: docker run -v $PWD:/project -w /project/ ghcr.io/${{ github.repository }}:${{ github.ref_name }} sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
