@@ -45,7 +45,7 @@ jobs:
               REBUILD=false
             fi
           fi
-          if [ "$REBUILD" = "true" ]
+          if [ "$REBUILD" = "true" ] ; then
             docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
             if [ "${{ github.ref_name }}" = "main" ] ; then
               docker push ${{ env.image }}
