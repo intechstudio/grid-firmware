@@ -36,6 +36,12 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.image }}
+
       - name: Check image revision
         run: |
           IMAGE_SHA=$( \
@@ -44,6 +50,7 @@ jobs:
           )
           echo "IMAGE_SHA"
           echo $IMAGE_SHA
+          echo "${{ steps.meta.outputs.labels.org.opencontainers.image.revision }}"
 
       - name: Build image
         run: docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
