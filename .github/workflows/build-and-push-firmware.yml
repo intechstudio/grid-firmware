@@ -42,6 +42,7 @@ jobs:
           if docker pull ${{ env.image }} ; then
             SHA=$(docker inspect ${{ env.image }} --format '{{ index .Config.Labels "${{ env.label }}" }}')
             echo $SHA
+            git fetch $SHA
             git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }}
             if [ -z "$(git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
               REBUILD=false
