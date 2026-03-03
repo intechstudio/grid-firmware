@@ -66,5 +66,4 @@ RUN git config --global --add safe.directory /project
 #RUN ./patch_esp_trace_include.sh
 
 # Define default command
-
 CMD ["bash"]
