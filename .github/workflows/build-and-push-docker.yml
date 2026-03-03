@@ -2,13 +2,13 @@ name: Build and push Docker image
 
 on:
   workflow_call:
-		inputs:
-			image-name:
-				description: Image name
-				required: true
-			dockerfile:
-				description: Path to the Dockerfile
-				required: true
+    inputs:
+      image-name:
+        description: Image name
+        required: true
+      dockerfile:
+        description: Path to the Dockerfile
+        required: true
   workflow_dispatch:
 
 jobs:
