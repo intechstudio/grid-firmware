@@ -1,7 +1,17 @@
 name: Build and push firmware
 
 on:
-  push:
+  workflow_call:
+    inputs:
+      image-name:
+        description: Image name
+        required: true
+        type: string
+      dockerfile:
+        description: Path to the Dockerfile
+        required: true
+        type: string
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -40,7 +50,6 @@ jobs:
 
       - name: Build ESP32 firmware
         run: |
-          docker run -v $PWD:/project -w /project/ \
-          ghcr.io/${{ github.repository }}:${{ github.ref_name }} \
+          docker run -v $PWD:/project -w /project ${{ env.image }} \
           sh -c "./lua_build.sh && ./pico_build.sh"
 

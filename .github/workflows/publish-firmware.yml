@@ -1,6 +1,7 @@
 name: Publish firmware
 
 on:
+  push:
   workflow_dispatch:
 
 permissions:
@@ -8,13 +9,10 @@ permissions:
   packages: write
 
 jobs:
-  build-image:
-    name: Build image
-    uses: ./.github/workflows/build-and-push-docker.yml
-    with:
-      image-name: "grid-firmware"
-      dockerfile: "Dockerfile"
   build-firmware:
     name: Build firmware
     uses: ./.github/workflows/build-and-push-firmware.yml
     needs: build-image
+    with:
+      image-name: "grid-firmware"
+      dockerfile: "Dockerfile"
