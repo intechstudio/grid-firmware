@@ -47,7 +47,7 @@ jobs:
         run: |
           LABEL=$(grep ${{ env.label }} <<< "${{ steps.meta.outputs.labels }}")
           REVISION=${LABEL##*=}
-          if [ -n "$(git diff HEAD $REVISION -- ${{ inputs.dockerfile }})" ] ; then
+          if [ -n "$(git diff $REVISION ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
             docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
             docker push ${{ env.image }}
           fi
