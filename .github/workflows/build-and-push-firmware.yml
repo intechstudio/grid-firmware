@@ -46,6 +46,8 @@ jobs:
                 docker push ${{ env.image }}
               fi
             fi
+          else
+            docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
           fi
 
       - name: Build ESP32 firmware
