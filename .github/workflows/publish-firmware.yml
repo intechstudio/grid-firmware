@@ -12,6 +12,3 @@ jobs:
   build-firmware:
     name: Build firmware
     uses: ./.github/workflows/build-and-push-firmware.yml
-    with:
-      image-name: "grid-firmware"
-      dockerfile: "Dockerfile"
