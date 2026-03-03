@@ -22,6 +22,7 @@ runs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Pull or rebuild image
+      shell: bash
       run: |
         REBUILD=true
         if docker pull ${{ env.image }} ; then
