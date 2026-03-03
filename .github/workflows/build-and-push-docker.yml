@@ -44,7 +44,8 @@ jobs:
 
       - name: Check image revision
         run: |
-          echo "${{ steps.meta.outputs.labels.org.opencontainers.image.revision }}"
+          REVISION=${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.revision'] }}
+          echo "$REVISION"
 
       - name: Build image
         run: docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
