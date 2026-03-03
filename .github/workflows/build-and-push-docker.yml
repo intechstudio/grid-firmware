@@ -33,13 +33,13 @@ jobs:
 
       - name: Set environment variables
         run: |
-					IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest"
+          IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
           echo "DOCKERFILE=${{ inputs.dockerfile }}" >> "$GITHUB_ENV"
 
       - name: Use environment variables
         run: |
-					echo $IMAGE
+          echo $IMAGE
 
       - name: Build image
         run: docker build \
