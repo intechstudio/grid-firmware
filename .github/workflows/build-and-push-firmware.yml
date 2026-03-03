@@ -40,7 +40,7 @@ jobs:
         run: |
           REBUILD=true
           if docker pull ${{ env.image }} ; then
-            SHA=$(docker inspect $IMAGE --format '{{ index .Config.Labels "${{ env.label }}" }}')
+            SHA="$(docker inspect $IMAGE --format '{{ index .Config.Labels "${{ env.label }}" }}')"
             if [ -z "$(git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
               REBUILD=false
             fi
