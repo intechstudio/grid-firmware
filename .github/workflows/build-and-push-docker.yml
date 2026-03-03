@@ -41,7 +41,6 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.image }}
-          labels: ${{ env.label }}
 
       - name: Build and push conditionally
         run: |
