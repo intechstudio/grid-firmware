@@ -41,10 +41,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.image }}
+          labels: ${{ env.label }}
 
       - name: Check image revision
         run: |
-          REVISION="$(echo -e ${{ steps.meta.outputs.labels }} | grep ${{ env.label }})"
+          REVISION="${{ steps.meta.outputs.labels }}"
           echo "$REVISION"
 
       - name: Build image
