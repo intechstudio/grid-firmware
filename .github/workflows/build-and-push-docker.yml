@@ -44,7 +44,7 @@ jobs:
 
       - name: Check image revision
         run: |
-          REVISION=${{ steps.meta.outputs.labels }}
+          REVISION="$(echo ${{ steps.meta.outputs.labels }} | grep ${{ env.label }})"
           echo "$REVISION"
 
       - name: Build image
