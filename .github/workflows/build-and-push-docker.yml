@@ -19,6 +19,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    env:
+      image: ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest
     steps:
 
       - name: Checkout code
@@ -38,6 +40,7 @@ jobs:
           IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest"
           echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
           echo "DOCKERFILE=${{ inputs.dockerfile }}" >> "$GITHUB_ENV"
+          echo "LABEL=org.opencontainers.image.revision" >> "$GITHUB_ENV"
 
       - name: Use environment variables
         run: |
@@ -46,7 +49,7 @@ jobs:
       - name: Build image
         run: |
           docker build \
-          --label org.opencontainers.image.revision=${{ github.sha }} \
+          --label $LABEL=${{ github.sha }} \
           -t ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref_name }} .
 
       - name: Push image
