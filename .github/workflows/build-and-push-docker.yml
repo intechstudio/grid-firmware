@@ -44,7 +44,7 @@ jobs:
 
       - name: Check image revision
         run: |
-          REVISION=${{ steps.meta.outputs.labels['org.opencontainers.image.revision'] }}
+          REVISION=${{ steps.meta.outputs.labels.org.opencontainers.image.revision }}
           echo "$REVISION"
 
       - name: Build image
