@@ -6,9 +6,11 @@ on:
       image-name:
         description: Image name
         required: true
+        type: string
       dockerfile:
         description: Path to the Dockerfile
         required: true
+        type: string
   workflow_dispatch:
 
 jobs:
