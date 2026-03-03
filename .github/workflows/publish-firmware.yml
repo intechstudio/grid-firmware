@@ -11,4 +11,4 @@ permissions:
 jobs:
   build-firmware:
     name: Build firmware
-    uses: .github/workflows/build-and-push-firmware.yml
+    uses: ./.github/workflows/build-and-push-firmware.yml

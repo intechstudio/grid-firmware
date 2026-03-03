@@ -11,7 +11,6 @@ jobs:
       packages: write
     env:
       image: ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest
-      label: org.opencontainers.image.revision
     steps:
 
       - name: Checkout code
@@ -20,7 +19,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Prepare image
-        uses: .github/actions/prepare-image
+        uses: ./.github/actions/prepare-image
         with:
           image-name: "grid-firmware"
           dockerfile: "Dockerfile"
