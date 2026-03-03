@@ -23,7 +23,7 @@ runs:
 
     - name: Pull or rebuild image
       env:
-        image: ghcr.io/${{ github.repository_owner }}/grid-firmware:latest
+        image: ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest
         label: org.opencontainers.image.revision
       shell: bash
       run: |
