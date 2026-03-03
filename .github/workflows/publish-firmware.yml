@@ -12,6 +12,9 @@ jobs:
   build-image:
     name: Build image
     uses: ./.github/workflows/build-and-push-docker.yml
+    with:
+      image-name: "grid-firmware"
+      dockefile: "Dockerfile"
   build-firmware:
     name: Build firmware
     uses: ./.github/workflows/build-and-push-firmware.yml
