@@ -20,7 +20,7 @@ jobs:
           ref: ${{ github.ref }}
 
       - name: Prepare image
-        uses: .github/workflows/prepare-image.yml
+        uses: .github/actions/prepare-image
         with:
           image-name: "grid-firmware"
           dockerfile: "Dockerfile"
