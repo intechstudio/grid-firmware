@@ -38,16 +38,18 @@ jobs:
 
       - name: Pull or rebuild image
         run: |
+          REBUILD=true
           if docker pull ${{ env.image }} ; then
             SHA=$(docker inspect $IMAGE --format '{{ index .Config.Labels "${{ env.label }}" }}')
-            if [ -n "$(git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
-              docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
-              if [ "${{ github.ref_name }}" = "main" ] ; then
-                docker push ${{ env.image }}
-              fi
+            if [ -z "$(git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
+              REBUILD=false
             fi
-          else
+          fi
+          if [ "$REBUILD" = "true" ]
             docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
+            if [ "${{ github.ref_name }}" = "main" ] ; then
+              docker push ${{ env.image }}
+            fi
           fi
 
       - name: Build ESP32 firmware
