@@ -36,6 +36,15 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Check image revision
+        run:
+          IMAGE_SHA=$( \
+            docker manifest inspect ${{ env.image }} \
+            --format '{{ index .Config.Labels "${{ env.label }}" }}'
+          )
+          echo "IMAGE_SHA"
+          echo $IMAGE_SHA
+
       - name: Build image
         run: docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
 
