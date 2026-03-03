@@ -1,11 +1,14 @@
 name: Build and push firmware
 
 on:
-  workflow_call:
-    outputs:
-      artifact_name:
-        value: "grid_esp32_fw.uf2"
+  push:
+    paths-ignore:
+      - 'Dockerfile'
   workflow_dispatch:
+  workflow_run:
+    workflows: [Build and push Docker image]
+    types:
+      - completed
 
 jobs:
   build-and-push:
