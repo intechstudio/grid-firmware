@@ -1,7 +1,7 @@
 name: Build and push firmware
 
 on:
-  workflow_call:
+  push:
 
 jobs:
   build-and-push:
@@ -9,6 +9,9 @@ jobs:
     permissions:
       contents: read
       packages: read
+    env:
+      image: ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest
+      label: org.opencontainers.image.revision
     steps:
 
       - name: Checkout code
@@ -23,8 +26,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Pull image
-        run: docker pull ghcr.io/${{ github.repository }}:${{ github.ref_name }}
+      - name: Pull or rebuild image
+        run: |
+          if docker pull ${{ env.image }} ; then
+            SHA=$(docker inspect $IMAGE --format '{{ index .Config.Labels "${{ env.label }}" }}')
+            if [ -n "$(git diff $SHA ${{ github.sha }} -- ${{ inputs.dockerfile }})" ] ; then
+              docker build --label ${{ env.label }}=${{ github.sha }} -t ${{ env.image }} .
+              if [ "${{ github.ref_name }}" = "main" ] ; then
+                docker push ${{ env.image }}
+              fi
+            fi
+          fi
 
       - name: Build ESP32 firmware
         run: |
