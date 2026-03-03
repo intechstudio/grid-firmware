@@ -2,6 +2,14 @@ name: Build and push Docker image
 
 on:
   workflow_call:
+		inputs:
+			image-name:
+				description: Image name
+				required: true
+			dockerfile:
+				description: Path to the Dockerfile
+				required: true
+  workflow_dispatch:
 
 jobs:
   build-and-push:
@@ -23,8 +31,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Set environment variables
+        run: |
+					IMAGE="ghcr.io/${{ github.repository_owner }}/${{ inputs.image-name }}:latest"
+          echo "IMAGE=$IMAGE" >> "$GITHUB_ENV"
+          echo "DOCKERFILE=${{ inputs.dockerfile }}" >> "$GITHUB_ENV"
+
+      - name: Use environment variables
+        run: |
+					echo $IMAGE
+
       - name: Build image
-        run: docker build -t ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref_name }} .
+        run: docker build \
+          --label org.opencontainers.image.revision=${{ github.sha }} \
+          -t ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref_name }} .
 
       - name: Push image
         run: docker push ghcr.io/${{ github.repository_owner }}/grid-firmware:${{ github.ref_name }}
