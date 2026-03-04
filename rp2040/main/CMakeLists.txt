@@ -1,7 +1,7 @@
 add_executable(main
     main.c
-		../src/grid_pico_spi.c
-		../src/grid_pico_platform.c
+    ../src/grid_pico_spi.c
+    ../src/grid_pico_platform.c
     ../src/pico_pool.c
     ../src/pico_swsr.c
     ../../common/src/c/grid_msg.c
@@ -10,10 +10,10 @@ add_executable(main
     ../../common/src/c/grid_rollid.c
     ../../common/src/c/grid_utask.c
     ../vmp/vmp_def.c
-    ../../tools/vmp/vmp.c
+    ../../common/dep/vmp/vmp.c
 )
 
-target_include_directories(main PRIVATE ../vmp ../../tools/vmp ../src ../../common/src/c)
+target_include_directories(main PRIVATE ../vmp ../../common/dep/vmp ../src ../../common/src/c)
 
 pico_generate_pio_header(main ${CMAKE_CURRENT_LIST_DIR}/../src/uart_tx.pio)
 pico_generate_pio_header(main ${CMAKE_CURRENT_LIST_DIR}/../src/uart_rx.pio)
