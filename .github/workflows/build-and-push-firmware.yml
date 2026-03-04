@@ -29,3 +29,8 @@ jobs:
           docker run -v $PWD:/project -w /project ${{ env.image }} \
           sh -c "./lua_build.sh && ./pico_build.sh"
 
+      - name: Build D51 firmware
+        run: |
+          docker run -v $PWD:/project -w /project ${{ env.image }} \
+          sh -c "./lua_build.sh && ./d51_build.sh"
+
