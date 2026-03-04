@@ -27,10 +27,36 @@ jobs:
       - name: Build ESP32 firmware
         run: |
           docker run -v $PWD:/project -w /project ${{ env.image }} \
-          sh -c "./lua_build.sh && ./pico_build.sh"
+          sh -c "./lua_build.sh && ./pico_build.sh && ./esp_build.sh"
 
       - name: Build D51 firmware
         run: |
           docker run -v $PWD:/project -w /project ${{ env.image }} \
           sh -c "./lua_build.sh && ./d51_build.sh"
 
+      - name: Copy and rename artifacts
+        run: |
+          cp esp32/build/grid_fw.uf2 grid_esp32_release_${{ env.ACTION_DATE }}.uf2
+          cp esp32/build/grid_fw.uf2 grid_esp32_nightly_${{ env.ACTION_DATE }}.uf2
+          cp esp32/build/grid_fw.uf2 grid_esp32_nightly.uf2
+          cp d51/gcc/grid_fw.uf2 grid_d51_release_${{ env.ACTION_DATE }}.uf2
+          cp d51/gcc/grid_fw.uf2 grid_d51_nightly_${{ env.ACTION_DATE }}.uf2
+          cp d51/gcc/grid_fw.uf2 grid_d51_nightly.uf2
+
+      - name: Upload nightly artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: nightly_firmware
+          path: |
+            grid_esp32_nightly_${{ env.ACTION_DATE }}.uf2
+            grid_esp32_nightly.uf2
+            grid_d51_nightly_${{ env.ACTION_DATE }}.uf2
+            grid_d51_nightly.uf2
+
+      - name: Upload release artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: release_firmware
+          path: |
+            grid_esp32_release_${{ env.ACTION_DATE }}.uf2
+            grid_d51_release_${{ env.ACTION_DATE }}.uf2

@@ -2,8 +2,8 @@ idf_component_register(
     SRCS
         "vmp/vmp_def.c"
         "vmp/vmp_tag.c"
-        "../../../tools/vmp/vmp.c"
+        "../../../common/dep/vmp/vmp.c"
     INCLUDE_DIRS
         "vmp"
-        "../../../tools/vmp"
+        "../../../common/dep/vmp"
 )

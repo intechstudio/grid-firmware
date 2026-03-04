@@ -3,18 +3,18 @@ FROM debian:trixie
 RUN apt-get update
 
 # Dependencies of esp-idf
-#RUN apt -y install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+RUN apt -y install git wget flex bison gperf python3 python3-pip python3-venv cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
 
 # Clone esp-idf
-#RUN git clone -b v5.5 --recursive https://github.com/espressif/esp-idf.git
+RUN git clone -b v5.5 --recursive https://github.com/espressif/esp-idf.git
 
 # Install tools used by esp-idf for esp32s3
-#WORKDIR /esp-idf
-#RUN ./install.sh esp32s3 > install-sh.log 2>&1
-#WORKDIR /
+WORKDIR /esp-idf
+RUN ./install.sh esp32s3 > install-sh.log 2>&1
+WORKDIR /
 
-#ENV IDF_PATH=/esp-idf
-#ENTRYPOINT ["/esp-idf/tools/docker/entrypoint.sh"]
+ENV IDF_PATH=/esp-idf
+ENTRYPOINT ["/esp-idf/tools/docker/entrypoint.sh"]
 
 # Install pico sdk and build dependencies
 RUN apt -y install git python3 python3-pip cmake gcc-arm-none-eabi libnewlib-arm-none-eabi build-essential xxd
@@ -58,12 +58,12 @@ RUN pre-commit --version
 RUN git config --global --add safe.directory /project
 
 # Patch esp_efuse_startup.c
-#COPY ./patch_esp_efuse_startup.sh /
-#RUN ./patch_esp_efuse_startup.sh
+COPY ./patch_esp_efuse_startup.sh /
+RUN ./patch_esp_efuse_startup.sh
 
 # Patch FreeRTOSConfig.h
-#COPY ./patch_esp_trace_include.sh /
-#RUN ./patch_esp_trace_include.sh
+COPY ./patch_esp_trace_include.sh /
+RUN ./patch_esp_trace_include.sh
 
 # Define default command
 CMD ["bash"]
