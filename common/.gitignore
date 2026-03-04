@@ -20,3 +20,6 @@
 
 !dep/tomlc99
 !dep/tomlc99/**
+
+!dep/vmp
+!dep/vmp/**
