@@ -7,4 +7,3 @@ esptool.py --chip esp32s3 -p "$PORT" -b 2000000 --before=default_reset --after=n
 if [ "$OTA" = "yes" ]; then
 	otatool.py -p "$PORT" switch_ota_partition --slot 0
 fi
-

@@ -50,9 +50,9 @@ RUN pre-commit --version
 
 # Copy pre-commit hooks and create a git directory,
 # to allow missing environments of hooks to be installed
-#COPY ./.pre-commit-config.yaml /
-#RUN git init
-#RUN pre-commit install-hooks
+COPY ./.pre-commit-config.yaml /
+RUN git init
+RUN pre-commit install-hooks
 
 # Add /project as a safe git repository
 RUN git config --global --add safe.directory /project

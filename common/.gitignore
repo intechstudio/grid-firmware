@@ -3,6 +3,7 @@
 !src/c
 !src/c/*.h
 !src/c/*.c
+!src/c/LICENSE
 
 !src/lua
 !src/lua/*.lua
