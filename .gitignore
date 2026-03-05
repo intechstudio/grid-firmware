@@ -31,6 +31,7 @@
 !esp_debug.sh
 !esp_flash.sh
 !esp_monitor.sh
+!LICENSE
 !lua_build.sh
 !patch_esp_efuse_startup.sh
 !patch_esp_trace_include.sh
