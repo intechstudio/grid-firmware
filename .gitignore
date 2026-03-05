@@ -6,14 +6,16 @@
 *.swp
 *.swo
 
-!.gitignore
-
 !.github
 !.github/workflows
 !.github/workflows/*.yml
 !.github/actions
 !.github/actions/prepare-image
 !.github/actions/prepare-image/action.yml
+
+!.clang-format
+!.gitignore
+!.pre-commit-config.yaml
 
 !common
 !d51
@@ -31,8 +33,11 @@
 !esp_debug.sh
 !esp_flash.sh
 !esp_monitor.sh
+!ignore-words.txt
 !LICENSE
 !lua_build.sh
 !patch_esp_efuse_startup.sh
 !patch_esp_trace_include.sh
 !pico_build.sh
+!pre_commit.sh
+!stylua.toml

@@ -1,0 +1,36 @@
+exclude: |
+  (?x)^(
+    common/dep/|
+    d51/armcc/|
+    d51/CMSIS/|
+    d51/config/|
+    d51/examples/|
+    d51/gcc/|
+    d51/hal/|
+    d51/hpl/|
+    d51/hri/|
+    d51/samd51a/|
+    d51/stdio_redirect/|
+    d51/thirdparty/|
+    d51/usb/|
+    esp32/bootloader/|
+    tools/
+  )
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+      - id: check-yaml
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+
+  - repo: https://github.com/pre-commit/mirrors-clang-format
+    rev: v17.0.6
+    hooks:
+      - id: clang-format
+
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.1.0
+    hooks:
+      - id: stylua-github # or stylua-system for a local binary
