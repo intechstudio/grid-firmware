@@ -22,3 +22,4 @@ jobs:
       product_name: "grid"
       version_tag: ${{ needs.build-firmware.outputs.version_tag }}
       timestamp: ${{ needs.build-firmware.outputs.timestamp }}
+    secrets: inherit
