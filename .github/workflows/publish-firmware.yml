@@ -12,3 +12,20 @@ jobs:
   build-firmware:
     name: Build firmware
     uses: ./.github/workflows/build-and-push-firmware.yml
+
+  check-tag:
+    name: Check for a release version tag
+    needs: build-firmware
+    steps:
+      - name: Check if any tags contain the specified commit
+        run: |
+          if [ -z "$(git tag --contains ${{ github.sha }})" ] ; then
+            exit 1
+          fi
+
+  publish-stable:
+    name: Publish stable release
+    needs: check-tag
+    steps:
+      - name: boop the beep
+        run: echo "the beep has been booped"

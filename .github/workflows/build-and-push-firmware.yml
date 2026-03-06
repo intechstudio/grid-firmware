@@ -34,6 +34,10 @@ jobs:
           docker run -v $PWD:/project -w /project ${{ env.image }} \
           sh -c "./lua_build.sh && ./d51_build.sh"
 
+      - name: Set environment variables
+        run: |
+          echo "ACTION_DATE=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
+
       - name: Copy and rename artifacts
         run: |
           cp esp32/build/grid_fw.uf2 grid_esp32_release_${{ env.ACTION_DATE }}.uf2
