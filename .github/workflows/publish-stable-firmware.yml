@@ -30,9 +30,6 @@ on:
         required: true
         type: string
 
-permissions:
-  contents: write
-
 jobs:
   publish-stable:
     runs-on: ubuntu-latest
