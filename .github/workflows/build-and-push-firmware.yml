@@ -15,6 +15,8 @@ jobs:
       packages: write
     env:
       image: ghcr.io/${{ github.repository_owner }}/grid-firmware:latest
+    outputs:
+      publish_stable: ${{ steps.set_out.outputs.publish_stable }}
     steps:
 
       - name: Checkout code
@@ -39,9 +41,11 @@ jobs:
           sh -c "./lua_build.sh && ./d51_build.sh"
 
       - name: Set environment variables
-        run: |
-          echo "ACTION_DATE=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
-          echo "publish_stable=$(git tag --contains ${{ github.sha }})" >> $GITHUB_OUTPUT
+        run: echo "ACTION_DATE=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
+
+      - name: Set output variables
+        id: set_out
+        run: echo "publish_stable=$(git tag --contains ${{ github.sha }})" >> $GITHUB_OUTPUT
 
       - name: Copy and rename artifacts
         run: |
