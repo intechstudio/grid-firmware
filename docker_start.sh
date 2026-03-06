@@ -12,4 +12,3 @@ else
 fi
 
 $CONTAINER_CMD run $ARGS --network=host -it -v /dev:/dev -v $PWD:/project -w /project/ grid-fw-build
-
