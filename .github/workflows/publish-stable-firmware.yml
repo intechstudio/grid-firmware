@@ -40,13 +40,13 @@ jobs:
           name: release_firmware
           path: release/
 
-      - name: Zip artifacts for Github Release
+      - name: Zip artifacts for github release
         uses: vimtor/action-zip@v1
         with:
           files: release/
           dest: ${{ inputs.product_name }}_release.zip
 
-      - name: Create Production Release
+      - name: Create stable release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ inputs.version_tag }}
