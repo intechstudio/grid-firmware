@@ -13,21 +13,11 @@ jobs:
     name: Build firmware
     uses: ./.github/workflows/build-and-push-firmware.yml
 
-  check-tag:
-    runs-on: ubuntu-latest
-    name: Check for a release version tag
-    needs: build-firmware
-    steps:
-      - name: Check if any tags contain the specified commit
-        run: |
-          if [ -z "$(git tag --contains ${{ github.sha }})" ] ; then
-            exit 1
-          fi
-
   publish-stable:
     runs-on: ubuntu-latest
     name: Publish stable release
-    needs: check-tag
+    needs: build-firmware
+    if: needs.build-firmware.outputs.publish_stable
     steps:
       - name: boop the beep
         run: echo "the beep has been booped"

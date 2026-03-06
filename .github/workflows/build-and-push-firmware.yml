@@ -2,6 +2,10 @@ name: Build and push firmware
 
 on:
   workflow_call:
+    outputs:
+      publish_stable:
+        description: "Whether a stable release should be published."
+        value: ${{ jobs.build-and-push.outputs.publish_stable }}
 
 jobs:
   build-and-push:
@@ -37,6 +41,7 @@ jobs:
       - name: Set environment variables
         run: |
           echo "ACTION_DATE=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_ENV
+          echo "publish_stable=$(git tag --contains ${{ github.sha }})" >> $GITHUB_OUTPUT
 
       - name: Copy and rename artifacts
         run: |
