@@ -14,6 +14,7 @@ jobs:
     uses: ./.github/workflows/build-and-push-firmware.yml
 
   check-tag:
+    runs-on: ubuntu-latest
     name: Check for a release version tag
     needs: build-firmware
     steps:
@@ -24,6 +25,7 @@ jobs:
           fi
 
   publish-stable:
+    runs-on: ubuntu-latest
     name: Publish stable release
     needs: check-tag
     steps:
