@@ -14,10 +14,11 @@ jobs:
     uses: ./.github/workflows/build-and-push-firmware.yml
 
   publish-stable:
-    runs-on: ubuntu-latest
     name: Publish stable release
     needs: build-firmware
-    if: needs.build-firmware.outputs.publish_stable
-    steps:
-      - name: boop the beep
-        run: echo "the beep has been booped"
+    if: needs.build-firmware.outputs.version_tag
+    uses: ./.github/workflows/publish-stable-firmware.yml
+    with:
+      product_name: "grid"
+      version_tag: ${{ needs.build-firmware.outputs.version_tag }}
+      timestamp: ${{ needs.build-firmware.outputs.timestamp }}
