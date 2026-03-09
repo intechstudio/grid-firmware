@@ -1,6 +1,6 @@
 version: "1.0.0"
 description: Grid Common library
-url: https://github.com/intechstudio/grid-firmware
+url: https://github.com/intechstudio/grid-fw
 dependencies:
   idf: ">=5.0"
 files:
