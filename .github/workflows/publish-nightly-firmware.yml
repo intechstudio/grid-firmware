@@ -45,6 +45,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           name: ${{ inputs.product_name }} nightly
+          tag_name: nightly
           files: ${{ inputs.product_name }}_nightly.zip
           draft: false
           prerelease: true
