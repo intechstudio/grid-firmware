@@ -1,0 +1,38 @@
+name: Push components to https://components.espressif.com
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - 'common/src/**'
+      - 'esp32/components/**'
+      - '.github/workflows/idf-repository-package-update.yml'
+
+jobs:
+  upload_components:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Set Date
+        run: echo "action_date=$(date +v%Y.%-m.%-d%H%M)" >> $GITHUB_ENV
+
+      - name: Check Date
+        run: echo ${{ env.action_date }}
+
+      - name: Convert native lua sources to C headers
+        run: ./lua_build.sh
+
+      - name: Upload components to the component registry
+        uses: espressif/upload-components-ci-action@v1
+        with:
+          components: |
+            grid_common:common
+            grid_esp32_led:esp32/components/grid_esp32_led
+            grid_esp32_nvm:esp32/components/grid_esp32_nvm
+            grid_esp32_littlefs:esp32/components/grid_esp32_littlefs
+          namespace: "sukuwc"
+          version: ${{ env.action_date }}
+          api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}

@@ -24,3 +24,6 @@
 
 !dep/vmp
 !dep/vmp/**
+
+!CMakeLists.txt
+!idf_component.yml
