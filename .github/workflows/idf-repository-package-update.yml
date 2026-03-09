@@ -34,6 +34,6 @@ jobs:
             grid_esp32_led:esp32/components/grid_esp32_led
             grid_esp32_nvm:esp32/components/grid_esp32_nvm
             grid_esp32_littlefs:esp32/components/grid_esp32_littlefs
-          namespace: "sukuwc"
+          namespace: "benblaise-intech"
           version: ${{ env.action_date }}
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
