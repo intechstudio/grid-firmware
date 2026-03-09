@@ -16,10 +16,10 @@ jobs:
   publish-stable:
     name: Publish stable release
     needs: build-firmware
-    if: needs.build-firmware.outputs.version_tag
+    if: ${{ github.ref_type == 'tag' }}
     uses: ./.github/workflows/publish-stable-firmware.yml
     with:
       product_name: "grid"
-      version_tag: ${{ needs.build-firmware.outputs.version_tag }}
+      version_tag: ${{ github.ref_name }}
       timestamp: ${{ needs.build-firmware.outputs.timestamp }}
     secrets: inherit

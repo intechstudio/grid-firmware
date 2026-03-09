@@ -3,9 +3,6 @@ name: Build and push firmware
 on:
   workflow_call:
     outputs:
-      version_tag:
-        description: "Any version tags that contain the commit"
-        value: ${{ jobs.build-and-push.outputs.version_tag }}
       timestamp:
         description: "Build date timestamp"
         value: ${{ jobs.build-and-push.outputs.timestamp }}
@@ -19,7 +16,6 @@ jobs:
     env:
       image: ghcr.io/${{ github.repository_owner }}/grid-firmware:latest
     outputs:
-      version_tag: ${{ steps.set_out.outputs.version_tag }}
       timestamp: ${{ steps.set_out.outputs.timestamp }}
     steps:
 
@@ -49,9 +45,7 @@ jobs:
 
       - name: Set output variables
         id: set_out
-        run: |
-          echo "version_tag=$(git tag --contains ${{ github.sha }})" >> $GITHUB_OUTPUT
-          echo "timestamp=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
+        run: echo "timestamp=$(date +'%Y-%m-%d-%H%M')" >> $GITHUB_OUTPUT
 
       - name: Copy and rename artifacts
         run: |
