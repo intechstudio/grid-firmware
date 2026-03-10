@@ -32,7 +32,8 @@ jobs:
           #git clone https://${{ secrets.PERSONALACCESSTOKEN }}@github.com/intechstudio/grid-protocol.git
 
       - name: Setup python
-        run: sh -c "\
+        uses: actions/setup-python@v2
+        run: "\
           python ./.github/workflows/protocol_converter.py \
           ./common/src/c/grid_protocol.h,\
           ./common/src/c/grid_ui_system.h,\
