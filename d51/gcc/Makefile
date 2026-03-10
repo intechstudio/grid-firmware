@@ -659,6 +659,6 @@ debug_post:
 
 # ================== RELEASE FOR AUTOMATION =================
 release: $(SUB_DIRS) $(OUTPUT_FILE_PATH) release_post
-release: GRID_DEFINES = -DGRID_BUILD_RELEASE
+release: clean GRID_DEFINES = -DGRID_BUILD_RELEASE
 release_post:
 	python3 ../../tools/uf2conv/uf2conv.py -c -b 0x4000 -o ./grid_fw.uf2 ./$(OUTPUT_FILE_NAME).bin
