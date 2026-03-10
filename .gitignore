@@ -9,6 +9,7 @@
 !.github
 !.github/workflows
 !.github/workflows/*.yml
+!.github/workflows/*.py
 !.github/actions
 !.github/actions/prepare-image
 !.github/actions/prepare-image/action.yml
