@@ -31,7 +31,7 @@ jobs:
           #git config --global user.name "Intech Bot"
           #git clone https://${{ secrets.PERSONALACCESSTOKEN }}@github.com/intechstudio/grid-protocol.git
 
-      - uses: actions/setup-python@v2
+      - uses: actions/setup-python@v6
       - name: Setup python
         run: sh -c "\
           python3 ./.github/workflows/protocol_converter.py \
