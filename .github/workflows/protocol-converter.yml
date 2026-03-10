@@ -34,9 +34,6 @@ jobs:
 
       - name: Run protocol converter
         run: |
-          pwd
-          ls -la
-          cd grid-firmware
           python ./.github/workflows/protocol_converter.py "\
           ./common/src/c/grid_protocol.h,\
           ./common/src/c/grid_ui_system.h,\
