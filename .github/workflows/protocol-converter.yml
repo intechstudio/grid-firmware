@@ -53,9 +53,9 @@ jobs:
           cat -v src/grid_protocol_bot.json
           if [ -n "$(git status --porcelain)" ] ; then
             git add --all
-            git commit -m "BOT protocol file synced from grid-fw repo"
             git config --global user.email "bot@intech.studio"
             git config --global user.name "Intech Bot"
+            git commit -m "BOT protocol file synced from grid-fw repo"
             git remote set-url origin \
               https://${{ secrets.PERSONALACCESSTOKEN }}@github.com/${{ env.protocol-repo }}
             git push
