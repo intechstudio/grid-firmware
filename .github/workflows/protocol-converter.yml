@@ -32,8 +32,8 @@ jobs:
 
       - uses: actions/setup-python@v2
       - name: Setup python
-        run: >
-          python ./.github/workflows/protocol_converter.py
+        run: python ./.github/workflows/protocol_converter.py \
+          "\
           ./common/src/c/grid_protocol.h,\
           ./common/src/c/grid_ui_system.h,\
           ./common/src/c/grid_ui_button.h,\
@@ -41,9 +41,10 @@ jobs:
           ./common/src/c/grid_ui_endless.h,\
           ./common/src/c/grid_ui_potmeter.h,\
           ./common/src/c/grid_ui_lcd.h,\
-          ./common/src/c//lua_source_collection.h
-          grid-protocol/src/grid_protocol_bot.json
-          grid-protocol/grid-protocol/lists.py
+          ./common/src/c/lua_source_collection.h\
+          " \
+          grid-protocol/src/grid_protocol_bot.json \
+          grid-protocol/grid-protocol/lists.py\
 
       - name: Check file
         run: |
