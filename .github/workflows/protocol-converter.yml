@@ -39,6 +39,7 @@ jobs:
 
       - name: Run protocol converter
         run: |
+          echo "$pwd"
           cd grid-firmware
           python ./.github/workflows/protocol_converter.py "\
           ./common/src/c/grid_protocol.h,\
