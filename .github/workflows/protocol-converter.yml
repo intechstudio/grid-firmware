@@ -26,13 +26,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v6
 
-      - name: Checkout protocol repo
-        uses: actions/checkout@v6
-        with:
-          repository: intechstudio/grid-protocol
-          #git config --global user.email "bot@intech.studio"
-          #git config --global user.name "Intech Bot"
-          #git clone https://${{ secrets.PERSONALACCESSTOKEN }}@github.com/intechstudio/grid-protocol.git
+      - name: Clone protocol repo
+        run: git clone https://github.com/intechstudio/grid-protocol.git
 
       - name: Setup python
         uses: actions/setup-python@v6
