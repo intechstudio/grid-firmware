@@ -34,14 +34,14 @@ jobs:
       - name: Setup python
         run: >
           python ./.github/workflows/protocol_converter.py
-          ./grid_common/grid_protocol.h,
-          ./grid_common/lua_src/lua_source_collection.h,
-          ./grid_common/grid_ui_system.h,
-          ./grid_common/grid_ui_button.h,
-          ./grid_common/grid_ui_encoder.h,
-          ./grid_common/grid_ui_endless.h,
-          ./grid_common/grid_ui_potmeter.h,
-          ./grid_common/grid_ui_lcd.h
+          ./common/src/c/grid_protocol.h,
+          ./common/src/c/grid_ui_system.h,
+          ./common/src/c/grid_ui_button.h,
+          ./common/src/c/grid_ui_encoder.h,
+          ./common/src/c/grid_ui_endless.h,
+          ./common/src/c/grid_ui_potmeter.h,
+          ./common/src/c/grid_ui_lcd.h,
+          ./common/src/c//lua_source_collection.h
           grid-protocol/src/grid_protocol_bot.json
           grid-protocol/grid-protocol/lists.py
 
