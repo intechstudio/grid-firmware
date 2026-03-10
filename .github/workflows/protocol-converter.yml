@@ -1,0 +1,51 @@
+name: Protocol converter
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - main
+    paths:
+      - 'common/src/c/grid_protocol.h'
+      - 'common/src/c/grid_ui_system.h'
+      - 'common/src/c/grid_ui_button.h'
+      - 'common/src/c/grid_ui_encoder.h'
+      - 'common/src/c/grid_ui_endless.h'
+      - 'common/src/c/grid_ui_potmeter.h'
+      - 'common/src/c/grid_ui_lcd.h'
+      - 'common/src/c/lua_source_collection.h'
+      - '.github/workflows/protocol-converter.yml'
+      - '.github/workflows/protocol_converter.py'
+      - '.github/workflows/documentation_validator.sh'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Checkout code
+        run: |
+          git config --global user.email "bot@intech.studio"
+          git config --global user.name "Intech Bot"
+          git clone https://${{ secrets.PERSONALACCESSTOKEN }}@github.com/intechstudio/grid-protocol.git
+
+      - uses: actions/setup-python@v2
+      - name: Setup python
+        run: >
+          python ./.github/workflows/protocol_converter.py
+          ./grid_common/grid_protocol.h,
+          ./grid_common/lua_src/lua_source_collection.h,
+          ./grid_common/grid_ui_system.h,
+          ./grid_common/grid_ui_button.h,
+          ./grid_common/grid_ui_encoder.h,
+          ./grid_common/grid_ui_endless.h,
+          ./grid_common/grid_ui_potmeter.h,
+          ./grid_common/grid_ui_lcd.h
+          grid-protocol/src/grid_protocol_bot.json
+          grid-protocol/grid-protocol/lists.py
+
+      - name: Check file
+        run: |
+          cd grid-protocol
+          cat -v src/grid_protocol_bot.json
