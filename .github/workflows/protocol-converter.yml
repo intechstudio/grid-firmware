@@ -33,6 +33,8 @@ jobs:
 
       - name: Setup python
         uses: actions/setup-python@v2
+      
+      - name: Run protocol converter
         run: "\
           python ./.github/workflows/protocol_converter.py \
           ./common/src/c/grid_protocol.h,\
