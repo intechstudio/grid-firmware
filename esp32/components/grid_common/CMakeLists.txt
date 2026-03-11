@@ -4,17 +4,17 @@ idf_component_register(
         "linker_fragment.lf"
 
     SRC_DIRS
-        "src/c"
-        "dep/littlefs"
-        "dep/lua-5.4.3/src"
-        "dep/tomlc99"
+        "common/src/c"
+        "common/dep/littlefs"
+        "common/dep/lua-5.4.3/src"
+        "common/dep/tomlc99"
 
     INCLUDE_DIRS
         "."
-        "src/c"
-        "dep"
-        "dep/littlefs"
-        "dep/lua-5.4.3/src"
-        "dep/proto"
-        "build/lua"
+        "common/src/c"
+        "common/dep"
+        "common/dep/littlefs"
+        "common/dep/lua-5.4.3/src"
+        "common/dep/proto"
+        "common/build/lua"
 )
