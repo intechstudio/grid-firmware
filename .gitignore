@@ -16,6 +16,7 @@
 !.github/actions/prepare-image/action.yml
 
 !.clang-format
+!.codespellrc
 !.gitignore
 !.pre-commit-config.yaml
 
@@ -36,6 +37,7 @@
 !esp_debug.sh
 !esp_flash.sh
 !esp_monitor.sh
+!exclude-file.txt
 !ignore-words.txt
 !LICENSE
 !lua_build.sh
