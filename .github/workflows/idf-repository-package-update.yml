@@ -30,7 +30,7 @@ jobs:
         uses: espressif/upload-components-ci-action@v2
         with:
           components: |
-            grid_common:common
+            grid_common:esp32/components/grid_common
             grid_esp32_led:esp32/components/grid_esp32_led
             grid_esp32_nvm:esp32/components/grid_esp32_nvm
             grid_esp32_littlefs:esp32/components/grid_esp32_littlefs
