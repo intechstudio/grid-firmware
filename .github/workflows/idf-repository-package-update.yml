@@ -8,7 +8,7 @@ on:
       - main
     paths:
       - 'common/src/**'
-      - 'esp32/components/**'
+      - 'esp32s3/components/**'
       - '.github/workflows/idf-repository-package-update.yml'
 
 jobs:
@@ -28,17 +28,17 @@ jobs:
 
       - name: Replace symbolic link in grid_common with a recursive copy
         run: |
-          rm esp32/components/grid_common/common
-          cp -r common esp32/components/grid_common
+          rm env.esp-path/components/grid_common/common
+          cp -r common env.esp-path/components/grid_common
 
       - name: Upload components to the component registry
         uses: espressif/upload-components-ci-action@v2
         with:
           components: |
-            grid_common:esp32/components/grid_common
-            grid_esp32_led:esp32/components/grid_esp32_led
-            grid_esp32_nvm:esp32/components/grid_esp32_nvm
-            grid_esp32_littlefs:esp32/components/grid_esp32_littlefs
+            grid_common:env.esp-path/components/grid_common
+            grid_esp32_led:env.esp-path/components/grid_esp32_led
+            grid_esp32_nvm:env.esp-path/components/grid_esp32_nvm
+            grid_esp32_littlefs:env.esp-path/components/grid_esp32_littlefs
           namespace: "benblaise-intech"
           version: ${{ env.action_date }}
           api_token: ${{ secrets.IDF_COMPONENT_API_TOKEN }}
