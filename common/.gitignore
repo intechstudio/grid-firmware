@@ -23,8 +23,3 @@
 
 !dep/vmp
 !dep/vmp/**
-
-!CMakeLists.txt
-!idf_component.yml
-!LICENSE
-!linker_fragment.lf
