@@ -6,6 +6,9 @@
 *.swp
 *.swo
 
+!.archive
+!.archive/**
+
 !.github
 !.github/workflows
 !.github/workflows/*.yml
