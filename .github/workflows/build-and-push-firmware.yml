@@ -55,6 +55,7 @@ jobs:
           cp d51/gcc/grid_fw.uf2 grid_d51_release_${{ env.ACTION_DATE }}.uf2
           cp d51/gcc/grid_fw.uf2 grid_d51_nightly_${{ env.ACTION_DATE }}.uf2
           cp d51/gcc/grid_fw.uf2 grid_d51_nightly.uf2
+          cp .github/workflows/INSTRUCTIONS.txt INSTRUCTIONS.txt
 
       - name: Upload nightly artifacts
         uses: actions/upload-artifact@v6
@@ -73,3 +74,4 @@ jobs:
           path: |
             grid_esp32_release_${{ env.ACTION_DATE }}.uf2
             grid_d51_release_${{ env.ACTION_DATE }}.uf2
+            INSTRUCTIONS.txt
