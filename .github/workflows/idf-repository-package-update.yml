@@ -14,6 +14,8 @@ on:
 jobs:
   upload_components:
     runs-on: ubuntu-latest
+    env:
+      esp-path: esp32s3
     steps:
       - uses: actions/checkout@v6
 

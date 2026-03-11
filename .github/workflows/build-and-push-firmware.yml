@@ -15,6 +15,8 @@ jobs:
       packages: write
     env:
       image: ghcr.io/${{ github.repository_owner }}/grid-firmware:latest
+      d51-path: d51n20a
+      esp-path: esp32s3
     outputs:
       timestamp: ${{ steps.set_out.outputs.timestamp }}
     steps:

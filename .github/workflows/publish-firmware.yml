@@ -8,10 +8,6 @@ permissions:
   contents: write
   packages: write
 
-env:
-  esp-path: esp32s3
-  d51-path: d51n20a
-
 jobs:
   build-firmware:
     name: Build firmware
