@@ -66,7 +66,6 @@
 #include "esp_check.h"
 #include "esp_log.h"
 #include "esp_psram.h"
-#include "grid_esp32.h"
 #include "grid_esp32_lcd.h"
 #include "grid_esp32_nvm.h"
 #include "grid_esp32_port.h"
