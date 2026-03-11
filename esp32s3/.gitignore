@@ -2,7 +2,7 @@
 !sdkconfig
 
 !bootloader
-!bootloader/partitions-8MB.csv
+!bootloader/**
 
 !components
 !components/**
