@@ -10,6 +10,8 @@ D51_INC_DIR = \
 -I "../grid" \
 -I "../grid/d51" \
 -I "../grid/vmp" \
+-I "../grid/usb/class/midi" \
+-I "../grid/usb/class/midi/device" \
 
 D51_SRC_DIR = ../grid
 D51_SRCS = \
@@ -30,10 +32,14 @@ grid_d51_module_pbf4.c \
 grid_d51_module_po16.c \
 grid_d51_module_ef44.c \
 vmp/vmp_def.c \
+usb/class/midi/usb_protocol_midi.c \
+usb/class/midi/device/audiodf_midi.c \
 
 D51_OBJ_DIRS = \
 build/grid/d51 \
 build/grid/vmp \
+build/grid/usb/class/midi \
+build/grid/usb/class/midi/device \
 
 $(D51_OBJ_DIRS): ; mkdir -p $@
 
@@ -159,31 +165,6 @@ $(COM_OBJ_DIR)/%.o: $(COM_SRC_DIR)/%.c | $(COM_OBJ_DIR)
 	-MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)" -o "$@" "$<"
 
 OBJS_AS_ARGS += $(COM_SRCS:%.c=$(COM_OBJ_DIR)/%.o)
-
-#########################################
-# Platform-specific extensions for GRID #
-#########################################
-
-SUB_DIRS +=  \
-usb/class/midi/device \
-usb/class/midi \
-
-OBJS +=  \
-usb/class/midi/device/audiodf_midi.o \
-usb/class/midi/usb_protocol_midi.o \
-
-OBJS_AS_ARGS +=  \
-"usb/class/midi/device/audiodf_midi.o" \
-"usb/class/midi/usb_protocol_midi.o" \
-
-DIR_INCLUDES +=  \
--I"../" \
--I"../usb/class/midi/" \
--I"../usb/class/midi/device" \
-
-DEPS_AS_ARGS +=  \
-"usb/class/midi/device/audiodf_midi.d" \
-"usb/class/midi/usb_protocol_midi.d" \
 
 ################################################################################
 # Automatically-generated file. Do not edit!
@@ -658,7 +639,7 @@ debug_post:
 	arm-none-eabi-gdb -iex "target extended-remote localhost:3333" $(OUTPUT_FILE_NAME).elf
 
 # ================== RELEASE FOR AUTOMATION =================
-release: $(SUB_DIRS) $(OUTPUT_FILE_PATH) release_post
-release: clean GRID_DEFINES = -DGRID_BUILD_RELEASE
+release: clean $(SUB_DIRS) $(OUTPUT_FILE_PATH) release_post
+release: GRID_DEFINES = -DGRID_BUILD_RELEASE
 release_post:
 	python3 ../../tools/uf2conv/uf2conv.py -c -b 0x4000 -o ./grid_fw.uf2 ./$(OUTPUT_FILE_NAME).bin
