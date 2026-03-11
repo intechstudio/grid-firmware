@@ -20,9 +20,9 @@
 !.pre-commit-config.yaml
 
 !common
-!d51
-!d51/**
-!esp32
+!d51n20a
+!d51n20a/**
+!esp32s3
 !rp2040
 !tools
 
